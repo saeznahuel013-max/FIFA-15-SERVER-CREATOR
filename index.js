@@ -1,6 +1,6 @@
 const net = require('net');
 
-const TARGET_IP = '66.33.22.1'; // Aquí irá la IP de tu servidor de juego
+const TARGET_IP = '10.134.50.209'; // Aquí irá la IP de tu servidor de juego
 const PORT = process.env.PORT || 42124;
 
 const server = net.createServer((socket) => {
