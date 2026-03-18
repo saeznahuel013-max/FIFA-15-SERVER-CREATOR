@@ -1,29 +1,24 @@
 const net = require('net');
+const mongoose = require('mongoose');
+
+// Railway te da esta variable automáticamente si conectaste el servicio
+const mongoURI = process.env.MONGODB_URL || process.env.MONGO_URL;
+
+if (mongoURI) {
+    mongoose.connect(mongoURI)
+        .then(() => console.log("[+] Base de Datos conectada"))
+        .catch(err => console.error("[!] Error DB:", err));
+}
 
 const PORT = process.env.PORT || 42124;
 
 const server = net.createServer((socket) => {
-    console.log('[+] Conexión recibida del iPad/PS3');
-
-    // Respuesta binaria para bypass de Origin
+    console.log('[+] FIFA intentando conectar...');
     const response = Buffer.from("000000010000000000000000", "hex");
-    
     socket.write(response);
-    console.log('[v] Respuesta de bypass enviada.');
-
-    socket.on('error', (err) => {
-        console.log('[!] Error: ' + err.message);
-    });
+    socket.end(); 
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`[*] Servidor FIFA activo en puerto ${PORT}`);
+    console.log(`[*] Servidor escuchando en puerto ${PORT}`);
 });
-const mongoose = require('mongoose');
-
-// Railway inyecta DATABASE_URL automáticamente
-const mongoURI = process.env.MONGODB_URL || "mongodb://localhost:27017/fifa";
-
-mongoose.connect(mongoURI)
-  .then(() => console.log("[+] Conectado a la Base de Datos de Railway"))
-  .catch(err => console.log("[!] Error de DB: " + err));
