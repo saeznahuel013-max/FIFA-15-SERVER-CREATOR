@@ -19,3 +19,11 @@ const server = net.createServer((socket) => {
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`[*] Servidor FIFA activo en puerto ${PORT}`);
 });
+const mongoose = require('mongoose');
+
+// Railway inyecta DATABASE_URL automáticamente
+const mongoURI = process.env.MONGODB_URL || "mongodb://localhost:27017/fifa";
+
+mongoose.connect(mongoURI)
+  .then(() => console.log("[+] Conectado a la Base de Datos de Railway"))
+  .catch(err => console.log("[!] Error de DB: " + err));
