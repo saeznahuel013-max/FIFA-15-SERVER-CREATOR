@@ -1,8 +1,10 @@
 {
-  "name": "fifa-redirector",
+  "name": "fifa-15-server-creator",
   "version": "1.0.0",
+  "description": "Servidor de bypass para FIFA",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
-  }
+  },
+  "dependencies": {}
 }
